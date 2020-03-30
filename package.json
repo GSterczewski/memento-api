@@ -1,0 +1,22 @@
+{
+  "name": "memento-api",
+  "version": "0.1.0",
+  "description": "api for memento app",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSterczewski/memento-api.git"
+  },
+  "author": "sterczewski.dev@protonmail.ch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSterczewski/memento-api/issues"
+  },
+  "homepage": "https://github.com/GSterczewski/memento-api#readme",
+  "devDependencies": {
+    "ava": "^3.5.1"
+  }
+}
