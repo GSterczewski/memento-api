@@ -21,12 +21,13 @@ const stubDB = () => {
 
         }),
         updateOne: (moment) => new Promise((resolve, reject) => {
-            for (let m of moments) {
-                if (m.id === moment.id) {
-                    m = moment
+            for (let i = 0; i < moments.length; i++) {
+                if (moments[i].id === moment.id) {
+                    moments[i] = moment
+
                     resolve({
                         success: true,
-                        result: m.id
+                        result: moment.id
                     })
                 }
             }
@@ -35,6 +36,13 @@ const stubDB = () => {
         }),
         getAll: (owner) => new Promise((resolve, reject) => {
             let result = moments.filter(moment => moment.owner === owner)
+            resolve({
+                success: true,
+                result
+            })
+        }),
+        findOne: (momentID) => new Promise((resolve, reject) => {
+            let result = moments.filter(moment => moment.id === momentID)[0]
             resolve({
                 success: true,
                 result

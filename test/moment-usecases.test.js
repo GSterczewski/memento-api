@@ -2,6 +2,7 @@ const test = require("ava");
 const buildAddMoment = require("../usecases/add-moment")
 const buildDeleteMoment = require("../usecases/delete-moment")
 const buildMoment = require("../moment/moment")
+const buildUpdateMoment = require("../usecases/update-moment")
 const stubs = require("./helpers/stubs")
 
 
@@ -9,6 +10,10 @@ const momentBuilder = buildMoment(stubs)
 const addMoment = buildAddMoment({
     momentsDB: stubs.momentsDB,
     buildMoment: momentBuilder
+})
+const updateMoment = buildUpdateMoment({
+    momentsDB: stubs.momentsDB,
+    momentBuilder
 })
 const deleteMoment = buildDeleteMoment(stubs)
 test.serial("successfully creates new moment and insert it into db", async t => {
@@ -28,11 +33,19 @@ test.serial("successfully creates new moment and insert it into db", async t => 
     t.assert(request.result === "id-0")
 
 })
+test.serial("updates moment", async t => {
+    let updateRequest = await updateMoment("id-0", {
+        name: "updatedName"
+    })
+    let getRequest = await stubs.momentsDB.findOne("id-0")
+    t.assert(updateRequest.success === true)
+    t.assert(updateRequest.result === "id-0")
+    t.assert(getRequest.result.name === "updatedName")
+})
 
 test.serial("deletes moment", async t => {
     let request = await deleteMoment("id-0")
     t.assert(request.success === true)
     t.assert(request.result === "id-0")
 })
-test.todo("updates moment")
 test.todo("list moments")
