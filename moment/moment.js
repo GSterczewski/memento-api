@@ -66,3 +66,5 @@ const buildMoment = ({
 
     })
 }
+
+module.exports = buildMoment
