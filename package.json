@@ -18,5 +18,8 @@
   "homepage": "https://github.com/GSterczewski/memento-api#readme",
   "devDependencies": {
     "ava": "^3.5.1"
+  },
+  "ava": {
+    "files": ["!test/helpers/**/*"]
   }
 }
