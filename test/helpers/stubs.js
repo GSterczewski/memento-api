@@ -19,6 +19,26 @@ const stubDB = () => {
             })
 
 
+        }),
+        updateOne: (moment) => new Promise((resolve, reject) => {
+            for (let m of moments) {
+                if (m.id === moment.id) {
+                    m = moment
+                    resolve({
+                        success: true,
+                        result: m.id
+                    })
+                }
+            }
+
+
+        }),
+        getAll: (owner) => new Promise((resolve, reject) => {
+            let result = moments.filter(moment => moment.owner === owner)
+            resolve({
+                success: true,
+                result
+            })
         })
     }
 }
