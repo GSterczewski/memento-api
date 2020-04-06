@@ -6,7 +6,6 @@ const buildUpdateMoment = require("../usecases/update-moment")
 const buildGetAllMoments = require("../usecases/get-all-moments")
 const stubs = require("./helpers/stubs")
 
-
 const momentBuilder = buildMoment(stubs)
 const addMoment = buildAddMoment({
     momentsDB: stubs.momentsDB,
