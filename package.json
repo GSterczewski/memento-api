@@ -20,6 +20,11 @@
     "ava": "^3.5.1"
   },
   "ava": {
-    "files": ["!test/helpers/**/*"]
+    "files": [
+      "!test/helpers/**/*"
+    ]
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
