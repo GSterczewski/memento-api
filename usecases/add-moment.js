@@ -13,7 +13,8 @@ const buildAddMoment = ({
         tags: moment.getTags(),
         source: moment.getSource(),
         isFavourite: moment.getIsFavourite(),
-        id: moment.getID()
+        id: moment.getID(),
+        icon: moment.getIcon()
     })
 }
 
