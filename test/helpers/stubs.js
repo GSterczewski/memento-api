@@ -34,7 +34,8 @@ const stubDB = () => {
 
 
         }),
-        getAll: (owner) => new Promise((resolve, reject) => {
+        findAll: (owner) => new Promise((resolve, reject) => {
+            console.log(owner)
             let result = moments.filter(moment => moment.owner === owner)
             resolve({
                 success: true,

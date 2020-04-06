@@ -3,6 +3,7 @@ const buildAddMoment = require("../usecases/add-moment")
 const buildDeleteMoment = require("../usecases/delete-moment")
 const buildMoment = require("../moment/moment")
 const buildUpdateMoment = require("../usecases/update-moment")
+const buildGetAllMoments = require("../usecases/get-all-moments")
 const stubs = require("./helpers/stubs")
 
 
@@ -16,6 +17,8 @@ const updateMoment = buildUpdateMoment({
     momentBuilder
 })
 const deleteMoment = buildDeleteMoment(stubs)
+const getAllMoments = buildGetAllMoments(stubs)
+
 test.serial("successfully creates new moment and insert it into db", async t => {
     let request = await addMoment({
         name: "Test moment 1",
@@ -33,6 +36,14 @@ test.serial("successfully creates new moment and insert it into db", async t => 
     t.assert(request.result === "id-0")
 
 })
+
+test.serial("get all moments", async t => {
+    let request = await getAllMoments("xyz123")
+    t.log(request.result)
+    t.assert(request.success === true)
+    t.assert(request.result.length === 1)
+    t.assert(request.result[0].icon === "some icon")
+})
 test.serial("updates moment", async t => {
     let updateRequest = await updateMoment("id-0", {
         name: "updatedName"
@@ -48,4 +59,3 @@ test.serial("deletes moment", async t => {
     t.assert(request.success === true)
     t.assert(request.result === "id-0")
 })
-test.todo("list moments")
