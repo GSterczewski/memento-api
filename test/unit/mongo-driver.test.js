@@ -1,5 +1,5 @@
 const test = require("ava");
-const db = require("../db/index")
+const db = require("../../db/index")
 
 const testCollection = 'test'
 let testObject1 = {

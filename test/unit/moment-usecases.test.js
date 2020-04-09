@@ -1,10 +1,10 @@
 const test = require("ava");
-const buildAddMoment = require("../usecases/add-moment")
-const buildDeleteMoment = require("../usecases/delete-moment")
-const buildMoment = require("../moment/moment")
-const buildUpdateMoment = require("../usecases/update-moment")
-const buildGetAllMoments = require("../usecases/get-all-moments")
-const stubs = require("./helpers/stubs")
+const buildAddMoment = require("../../usecases/add-moment")
+const buildDeleteMoment = require("../../usecases/delete-moment")
+const buildMoment = require("../../moment/moment")
+const buildUpdateMoment = require("../../usecases/update-moment")
+const buildGetAllMoments = require("../../usecases/get-all-moments")
+const stubs = require("../helpers/stubs")
 
 const momentBuilder = buildMoment(stubs)
 const addMoment = buildAddMoment({
