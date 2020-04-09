@@ -65,6 +65,7 @@ const stubIDGenerator = () => {
 
 
 const stubSanitize = str => str
+/*
 const stubValidator = () => ({
     isNameValid: (name) => true,
     isDateValid: (date) => true,
@@ -74,6 +75,14 @@ const stubValidator = () => ({
     isSourceValid: (source) => true,
     isOwnerValid: (owner) => true,
 
+})
+*/
+const stubValidator = () => ({
+    isLength: () => true,
+    isDate: () => true,
+    isUUIDv4: () => true,
+    isArray: () => true,
+    sanitize: str => str
 })
 const stubMakeSource = source => source
 /*
@@ -86,7 +95,7 @@ const momentBuilder = buildMoment({
 */
 const stubs = {
     validator: stubValidator(),
-    sanitize: stubSanitize,
+    //sanitize: stubSanitize,
     IDGenerator: stubIDGenerator(),
     momentsDB: stubDB(),
     makeSource: stubMakeSource
