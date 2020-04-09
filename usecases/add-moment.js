@@ -1,9 +1,9 @@
 //const buildMoment = require("../moment/moment")
 const buildAddMoment = ({
     momentsDB,
-    buildMoment
+    momentBuilder
 }) => (momentInfo) => {
-    const moment = buildMoment(momentInfo)
+    const moment = momentBuilder(momentInfo)
     return momentsDB.insert({
         owner: moment.getOwner(),
         name: moment.getName(),
