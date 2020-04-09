@@ -29,6 +29,7 @@ test('isDate', t => {
     t.assert(validator.isDate(new Date()) === true)
 
     t.assert(validator.isDate('12-04-2020') === true)
+    t.assert(validator.isDate(new Date(Date.now())) === true)
     t.assert(validator.isDate('14-14-2020') === false)
 })
 
