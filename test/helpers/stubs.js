@@ -96,7 +96,7 @@ const momentBuilder = buildMoment({
 const stubs = {
     validator: stubValidator(),
     //sanitize: stubSanitize,
-    IDGenerator: stubIDGenerator(),
+    IDGenerator: stubIDGenerator().generate,
     momentsDB: stubDB(),
     makeSource: stubMakeSource
 }

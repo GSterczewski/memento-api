@@ -1,41 +1,54 @@
 const buildMoment = ({
     IDGenerator,
-    sanitize,
     validator,
     makeSource
 }) => ({
     owner,
-    createdOn = Date.now(),
-    modifiedOn = Date.now(),
-    id = IDGenerator.generate(),
     sourceData,
     name,
     date,
     tags = [],
     icon,
-    isFavourite = false
+    isFavourite = false,
+    id = IDGenerator(),
+    modifiedOn = Date.now(),
+    createdOn = Date.now()
 
 }) => {
-    const sanitizedOwner = sanitize(owner)
-    const sanitizedName = sanitize(name)
-    const sanitizedIcon = sanitize(icon)
-    const sanitizedTags = tags.map(tag => sanitize(tag))
+    if (!validator.isArray(tags)) {
+        throw new Error(`Tags should be an array, got :${typeof tags}`)
+    }
+
+    const sanitizedOwner = validator.sanitize(owner)
+    const sanitizedName = validator.sanitize(name)
+    const sanitizedIcon = validator.sanitize(icon)
+    const sanitizedTags = tags.map(tag => validator.sanitize(tag))
     const source = makeSource(sourceData)
     let _isFavourite = isFavourite
 
 
-    if (!validator.isOwnerValid(sanitizedOwner)) {
-        throw new Error("Invalid owner")
+    if (!validator.isUUIDv4(sanitizedOwner)) {
+        throw new Error("Owner id is not valid uuid v4")
     }
-    if (!validator.isIdValid(id)) {
-        throw new Error("Invalid id")
+    if (!validator.isUUIDv4(id)) {
+        throw new Error("id is not valid uuid v4")
     }
-    if (!validator.isNameValid(sanitizedName)) {
+    if (!validator.isLength(sanitizedName, {
+            min: 2,
+            max: 50
+        })) {
         throw new Error("Invalid name")
     }
-    if (!validator.isDateValid(date)) {
+    if (!validator.isDate(date)) {
         throw new Error("Invalid date")
     }
+    if (!validator.isDate(new Date(createdOn))) {
+        throw new Error("Invalid createdOn")
+    }
+    if (!validator.isDate(new Date(modifiedOn))) {
+        throw new Error("Invalid modifiedOn")
+    }
+    /*
     if (!validator.isIconValid(sanitizedIcon)) {
         throw new Error("Invalid icon")
     }
@@ -45,6 +58,16 @@ const buildMoment = ({
     if (!validator.isSourceValid(source)) {
         throw new Error("Invalid source")
     }
+ */
+    sanitizedTags.forEach(tag => {
+        if (!validator.isLength(tag, {
+                min: 1,
+                max: 40
+            })) {
+            throw new Error("Invalid tag")
+        }
+    })
+
 
     return Object.freeze({
         getID: () => id,
@@ -63,7 +86,6 @@ const buildMoment = ({
         unsetFavourite: () => {
             _isFavourite = false
         }
-
     })
 }
 

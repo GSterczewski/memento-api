@@ -1,6 +1,6 @@
 const client = require("mongodb").MongoClient
 const MongoDriver = require("./mongo");
-
+// /const mongoAdapter = require("./mongo-adapter")
 /**
  * @todo move it to .env
  */
