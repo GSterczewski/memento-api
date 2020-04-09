@@ -1,22 +1,17 @@
 const test = require("ava");
-const buildAddMoment = require("../../usecases/add-moment")
-const buildDeleteMoment = require("../../usecases/delete-moment")
-const buildMoment = require("../../moment/moment")
-const buildUpdateMoment = require("../../usecases/update-moment")
-const buildGetAllMoments = require("../../usecases/get-all-moments")
 const stubs = require("../helpers/stubs")
 
-const momentBuilder = buildMoment(stubs)
-const addMoment = buildAddMoment({
-    momentsDB: stubs.momentsDB,
-    buildMoment: momentBuilder
-})
-const updateMoment = buildUpdateMoment({
+const momentBuilder = require("../../moment/moment")(stubs)
+const usecases = require("../../usecases/index")({
     momentsDB: stubs.momentsDB,
     momentBuilder
-})
-const deleteMoment = buildDeleteMoment(stubs)
-const getAllMoments = buildGetAllMoments(stubs)
+});
+
+
+const addMoment = usecases.addMoment
+const deleteMoment = usecases.deleteMoment
+const getAllMoments = usecases.listAllMoments
+const updateMoment = usecases.updateMoment
 
 test.serial("successfully creates new moment and insert it into db", async t => {
     let request = await addMoment({
