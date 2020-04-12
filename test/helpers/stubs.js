@@ -20,9 +20,11 @@ const stubDB = () => {
 
 
         }),
-        updateOne: (moment) => new Promise((resolve, reject) => {
+        updateOne: (momentID, moment) => new Promise((resolve, reject) => {
+
             for (let i = 0; i < moments.length; i++) {
-                if (moments[i].id === moment.id) {
+                console.log(moments[i])
+                if (moments[i].id === momentID) {
                     moments[i] = moment
 
                     resolve({
@@ -31,6 +33,10 @@ const stubDB = () => {
                     })
                 }
             }
+            reject({
+                success: false,
+                reason: "Object to update not found"
+            })
 
 
         }),

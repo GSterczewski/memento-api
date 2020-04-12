@@ -97,6 +97,7 @@ module.exports = function MongoDriver({
         try {
 
             if (!_db) await _connect();
+
             let updateRequest = await _db.collection(collection).replaceOne({
                 id
             }, updatedObject)

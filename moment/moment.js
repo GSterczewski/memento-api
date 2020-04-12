@@ -4,7 +4,7 @@ const buildMoment = ({
     makeSource
 }) => ({
     owner,
-    sourceData,
+    source,
     name,
     date,
     tags = [],
@@ -23,7 +23,7 @@ const buildMoment = ({
     const sanitizedName = validator.sanitize(name)
     const sanitizedIcon = validator.sanitize(icon)
     const sanitizedTags = tags.map(tag => validator.sanitize(tag))
-    const source = makeSource(sourceData)
+    const _source = makeSource(source)
     let _isFavourite = isFavourite
 
 
@@ -78,7 +78,7 @@ const buildMoment = ({
         getTags: () => sanitizedTags,
         getCreatedOn: () => createdOn,
         getModifiedOn: () => modifiedOn,
-        getSource: () => source,
+        getSource: () => _source,
         getIsFavourite: () => _isFavourite,
         setFavourite: () => {
             _isFavourite = true

@@ -5,7 +5,7 @@ const momentBuilder = require("../../moment/index")
 test("momentBuilder", t => {
     let momentInfo = {
         owner: IDGenerator(),
-        sourceData: {
+        source: {
             ip: '127.0.0.1',
             client: "mozilla",
             referrer: null
@@ -29,6 +29,8 @@ test("momentBuilder", t => {
     }
     let moment = momentBuilder(momentInfo)
 
+    t.throws(() => momentBuilder(invalidMomentInfo))
     t.assert(moment.getName() === "Test moment")
-    t.assert(momentBuilder(invalidMomentInfo) === true)
+    t.assert(moment.getSource().ip === '127.0.0.1')
+
 })
