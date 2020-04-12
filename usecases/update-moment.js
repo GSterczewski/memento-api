@@ -2,12 +2,19 @@ const buildUpdateMoment = ({
     momentsDB,
     momentBuilder
 }) => async (momentID, newProps) => {
-    let getRequest = await momentsDB.findOne(momentID)
+    let getRequest = await momentsDB.findOne({
+        id: momentID
+    })
     if (getRequest.success) {
-        let updatedMomentInfo = Object.assign({}, getRequest.result, newProps)
-        let updatedMoment = momentBuilder(updatedMomentInfo)
+        let props = Object.assign(newProps, {
+            modifiedOn: Date.now()
+        })
+        let updatedMomentInfo = Object.assign({}, getRequest.result, props)
 
-        return momentsDB.updateOne({
+        let updatedMoment = momentBuilder(updatedMomentInfo)
+        //console.log(updatedMoment)
+
+        return momentsDB.updateOne(momentID, {
             owner: updatedMoment.getOwner(),
             name: updatedMoment.getName(),
             createdOn: updatedMoment.getCreatedOn(),
@@ -16,6 +23,7 @@ const buildUpdateMoment = ({
             tags: updatedMoment.getTags(),
             source: updatedMoment.getSource(),
             isFavourite: updatedMoment.getIsFavourite(),
+            icon: updatedMoment.getIcon(),
             id: updatedMoment.getID()
         })
     } else {
