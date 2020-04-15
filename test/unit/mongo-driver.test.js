@@ -1,5 +1,12 @@
 const test = require("ava");
-const db = require("../../db/index")
+const client = require("mongodb").MongoClient
+const dotenv = require("dotenv").config()
+
+const db = require("../../db/mongo")({
+    DBUrl: process.env.LOCAL_DB_URL, //localMongoURL,
+    DBName: process.env.LOCAL_DB_NAME,
+    mongoClient: client
+})
 
 const testCollection = 'test'
 let testObject1 = {

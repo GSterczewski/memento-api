@@ -7,7 +7,9 @@ module.exports = function mongoAdapter(collection, mongoDriver) {
     const _updateOne = mongoDriver.updateOne.bind(null, _collection)
     return {
         insert: _insert,
-        deleteOne: _deleteOne,
+        deleteOne: id => _deleteOne({
+            id
+        }),
         findAll: _findAll,
         findOne: _findOne,
         updateOne: _updateOne

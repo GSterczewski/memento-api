@@ -3,7 +3,7 @@ const {
     ErrorTypes
 } = require("../config")
 module.exports = (req, res, next) => {
-    let authenticated = false
+    let authenticated = true
     if (authenticated) {
         next()
     } else {

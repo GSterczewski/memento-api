@@ -5,7 +5,8 @@ module.exports = function MongoDriver({
 }) {
 
     const _client = new mongoClient(DBUrl, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     })
 
     const _createErrorResponse = err => ({
@@ -110,7 +111,7 @@ module.exports = function MongoDriver({
         } catch (err) {
             console.error(err)
             return _createErrorResponse(err)
-        } //finally {}
+        }
 
     }
     const _delete = async (collection, query) => {
@@ -118,7 +119,7 @@ module.exports = function MongoDriver({
             if (!_db) await _connect();
             let toDelete = await _findOne(collection, query)
             if (toDelete) {
-                let deleteRequest = await _db.collection(collection).remove(query)
+                let deleteRequest = await _db.collection(collection).deleteOne(query)
                 return _createSuccessResponse(toDelete.result.id)
             } else {
                 return {

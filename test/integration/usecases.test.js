@@ -1,5 +1,14 @@
+const dotenv = require("dotenv").config()
 const test = require("ava")
-const mongoDriver = require("../../db/index")
+const client = require("mongodb").MongoClient
+
+const localMongoURL = process.env.LOCAL_DB_URL;
+const localDBName = process.env.LOCAL_DB_NAME;
+const mongoDriver = require("../../db/mongo")({
+    DBUrl: localMongoURL,
+    DBName: localDBName,
+    mongoClient: client
+})
 const momentsDB = require("../../db/mongo-adapter")('test', mongoDriver)
 const momentBuilder = require("../../moment/index")
 const IDGenerator = require("../../lib/IDGenerator")

@@ -1,7 +1,8 @@
 module.exports = ({
     server,
     middlewares,
-    handlers
+    handlers,
+
 }) => {
     const _server = server
     const _middlewares = middlewares

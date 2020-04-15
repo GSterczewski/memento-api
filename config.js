@@ -1,11 +1,14 @@
 const HTTPMethods = {
     get: "get",
-    post: "post"
+    post: "post",
+    update: "put",
+    delete: "delete"
 }
 
 const URLS = {
     home: "/",
-    api: "/api"
+    api: "/api",
+    moments: "/api/moments"
 }
 
 const Defaults = {

@@ -21,17 +21,19 @@ function Server({
         })
     }
     this._initHandlers = () => {
+
         this._handlers.forEach(({
             method,
             url,
             fns
         }) => {
+
             this._router[method](url, fns)
         })
     }
     this._runServer = () => {
         this._router.listen(this._port, this._hostname, () => {
-            console.log(`Server runnning on : http://${this._hostname}:${this._port}`)
+            console.log(`Server runnning on : http://${this._hostname}:${this._port}, mode : ${process.env.MODE}`)
 
         })
     }
